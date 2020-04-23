@@ -30,7 +30,7 @@ DAQProcess::DAQProcess(std::list<std::string> args) {
 
 void DAQProcess::register_modules(std::unique_ptr<ModuleList> const& ml) { ml->ConstructGraph(bufferMap_, userModuleMap_, commandOrderMap_); }
 
-void DAQProcess::execute_command(std::string cmd) {
+void DAQProcess::execute_command(const std::string& cmd) {
     std::unordered_set<std::string> user_module_list;
     for (auto const& um : userModuleMap_) {
         user_module_list.insert(um.first);
@@ -40,7 +40,11 @@ void DAQProcess::execute_command(std::string cmd) {
     if (commandOrderMap_.count(cmd)) {
         for (auto& moduleName : commandOrderMap_[cmd]) {
             if (userModuleMap_.count(moduleName)) {
-                userModuleMap_[moduleName]->execute_command(cmd);
+
+                std::unique_ptr<UserModule>& mod = userModuleMap_[moduleName];
+
+                std::future<std::string> res = std::async([&mod, cmd](){ return mod->execute_command(cmd); });
+
                 user_module_list.erase(moduleName);
             }
         }

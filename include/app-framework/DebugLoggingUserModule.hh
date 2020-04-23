@@ -26,7 +26,7 @@ class DebugLoggingUserModule : public UserModule {
      * @brief Logs the reception of the command
      * @param cmd Command from DAQProcess
      */
-    std::future<std::string> execute_command(std::string cmd) override;
+    std::string execute_command(const std::string& cmd) override;
 
 };
 }  // namespace appframework
