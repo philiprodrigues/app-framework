@@ -6,6 +6,7 @@
 #include <string>
 #include "app-framework-base/NamedObject.hh"
 #include "app-framework/Queues/NamedStdDeQueue.hh"
+#include "app-framework/Queues/NamedFollyQueue.hh"
 #include "ers/Issue.h"
 
 // ERS Issues declaration
@@ -23,7 +24,7 @@ namespace appframework {
 
 struct QueueConfig
 {
-  enum queue_kind { std_deque };
+    enum queue_kind { std_deque, folly_spsc, folly_mpmc };
 
   QueueConfig::queue_kind kind;
   size_t size;

@@ -21,6 +21,8 @@ QueueRegistry::get_queue(std::string name) {
 
         throw QueueTypeMismatch(ERS_HERE, name, realname_source, realname_target);
       }
+
+      return queuePtr;
   } 
 
   auto itP = this->queue_configmap_.find(name);
@@ -43,6 +45,13 @@ std::shared_ptr<NamedObject> QueueRegistry::create_queue(std::string name, const
     case QueueConfig::std_deque:
       queue = std::make_shared<NamedStdDeQueue<T>>(name, config.size);
       break;
+    case QueueConfig::folly_spsc:
+      queue = std::make_shared<NamedFollySPSCQueue<T>>(name, config.size);
+      break;
+    case QueueConfig::folly_mpmc:
+      queue = std::make_shared<NamedFollyMPMCQueue<T>>(name, config.size);
+      break;
+
     default:
       throw std::runtime_error("Unknown queue kind");
   }

@@ -16,7 +16,11 @@
 
 namespace appframework {
 
-template<class T>
+// TODO: I'd really like FollyQueueType to have a `T` in it somewhere,
+// so we can't instantiate this class with a folly queue containing a
+// type other than T, but I can't work out the necessary C++
+// incantation, so this way it is, for now
+template<class T, class FollyQueueType>
 class NamedFollyQueue
   : public NamedQueueI<T>
 {
@@ -64,8 +68,14 @@ public:
 private:
   
   const size_t fMaxSize;
-  folly::DMPMCQueue<T, false> fQueue;
+  FollyQueueType fQueue;
 };
+
+template<typename T>
+using NamedFollySPSCQueue = NamedFollyQueue<T, folly::DSPSCQueue<T, false>>;
+
+template<typename T>
+using NamedFollyMPMCQueue = NamedFollyQueue<T, folly::DMPMCQueue<T, false>>;
 
 } // namespace appframework
 
