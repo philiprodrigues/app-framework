@@ -17,7 +17,7 @@ macro(MakeDataTypeLibraries)
 
    configure_file(FanOutDAQModule.cc.in ${MAKE_DATATYPE_PREFIX}FanOutDAQModule.cc)
    add_library(${MAKE_DATATYPE_PREFIX}FanOutDAQModule_duneDAQModule SHARED ${MAKE_DATATYPE_PREFIX}FanOutDAQModule.cc)
-   target_link_libraries(${MAKE_DATATYPE_PREFIX}FanOutDAQModule_duneDAQModule ers::ers)
+   target_link_libraries(${MAKE_DATATYPE_PREFIX}FanOutDAQModule_duneDAQModule ers::ers Folly::folly)
 
 endmacro()
 

@@ -7,7 +7,7 @@
  * received with this code.
  */
 
-#include "app-framework/Queues/NamedFollyQueue.hh"
+#include "app-framework/Queues/FollyQueue.hh"
 
 #define BOOST_TEST_MODULE FollyQueue_test // NOLINT
 #include <boost/test/included/unit_test.hpp>
@@ -28,7 +28,7 @@ constexpr auto timeout = std::chrono::milliseconds(1);
 constexpr auto timeout_in_ms =
 std::chrono::duration_cast<std::chrono::milliseconds>(timeout).count();
 
-appframework::NamedFollyMPMCQueue<int> Queue("foo", 1000);
+appframework::FollyMPMCQueue<int> Queue("foo", 1000);
 
 } // namespace ""
 

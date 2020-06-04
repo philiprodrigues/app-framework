@@ -34,7 +34,6 @@ else()
 endif()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
-include_directories(${CMAKE_SOURCE_DIR}/ers)
 
 add_subdirectory(apps)
 add_subdirectory(doc)

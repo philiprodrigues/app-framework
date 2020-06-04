@@ -3,7 +3,7 @@
 
 #include "app-framework/NamedObject.hh"
 #include "app-framework/Queues/StdDeQueue.hh"
-#include "app-framework/Queues/NamedFollyQueue.hh"
+#include "app-framework/Queues/FollyQueue.hh"
 #include "ers/Issue.h"
 #include <map>
 #include <memory>

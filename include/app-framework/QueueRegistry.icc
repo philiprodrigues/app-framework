@@ -46,10 +46,10 @@ std::shared_ptr<NamedObject> QueueRegistry::create_queue(std::string name, const
       std::dynamic_pointer_cast<StdDeQueue<T>>(queue)->SetSize(config.size);
       break;
     case QueueConfig::folly_spsc:
-      queue = std::make_shared<NamedFollySPSCQueue<T>>(name, config.size);
+      queue = std::make_shared<FollySPSCQueue<T>>(name, config.size);
       break;
     case QueueConfig::folly_mpmc:
-      queue = std::make_shared<NamedFollyMPMCQueue<T>>(name, config.size);
+      queue = std::make_shared<FollyMPMCQueue<T>>(name, config.size);
       break;
 
     default:
